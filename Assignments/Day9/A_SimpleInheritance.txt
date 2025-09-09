@@ -1,0 +1,28 @@
+# 1. Create a base class Flight with basic flight information. Create a derived class ScheduledFlight that adds scheduling information.
+
+# Requirements:
+# -Flight should have attributes: flight number, airline.
+# -ScheduledFlight should add departure time and arrival time.
+# -Include methods to display complete flight information.
+ 
+# 2. Create a base class Person, derived class CrewMember, and a further derived class Pilot.
+# -Person contains name and ID.
+# -CrewMember adds role (e.g., "Cabin Crew", "Pilot").
+# -Pilot adds license number and rank (e.g., "Captain").
+ 
+ 
+# 3. Create a base class Service, and derive two classes: SecurityService and BaggageService.
+
+# Requirements:
+# -Service class has a method service_info().
+# -Derived classes override or extend this to describe their own service.
+ 
+ 
+# 4. Create one class PassengerDetails and another class TicketDetails. Create a new class Booking that inherits from both.
+
+# Requirements:
+
+# - PassengerDetails has name, age.
+# - TicketDetails has ticket number, seat number.
+# - Booking shows all information.
+ 

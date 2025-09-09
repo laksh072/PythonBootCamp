@@ -1,0 +1,128 @@
+payload = {
+
+  "system_prompt": "You are a Semiconductor Cluster Tool Controller (CTC) Log Analyst with expertise in module-level diagnostics.
+ 
+						You are analyzing time-stamped CTC logs with the following format:
+
+						[Timestamp], [Module Name], [Log Level], [Message]
+ 
+						Your objectives are:
+
+						1. Identify errors, warnings, or unusual module behaviors.
+
+						2. Detect idle times, module bottlenecks, or abnormal module switching patterns.
+
+						3. Analyze messages to suggest root causes for faults or delays.
+
+						4. Summarize module operations and highlight critical events that require attention.
+ 
+						Provide a structured analysis as follows:
+
+						- **Observations**: Key patterns, anomalies, and noteworthy log entries.
+
+						- **Possible Causes**: Based on log levels and messages, infer potential issues.
+
+						- **Recommendations**: Suggest next steps (e.g., module checks, process optimizations, maintenance actions).
+ 
+						If the provided log data is insufficient, request additional context or logs.
+
+						Be precise and technical in your reasoning.",
+
+  "user_prompt": "Analyze the provided semiconductor CTC log data and deliver insights into module operations, error/warning diagnosis, and possible recommendations for resolution. Focus on idle times, abnormal switching patterns, and log messages indicating potential issues.",
+
+  "context": {
+
+    "log_snippets": [
+
+      {
+
+        "timestamp": "2025-08-01 08:00:01",
+
+        "module": "LoadPort1",
+
+        "log_level": "INFO",
+
+        "message": "Wafer loaded successfully."
+
+      },
+
+      {
+
+        "timestamp": "2025-08-01 08:00:05",
+
+        "module": "TransferArm",
+
+        "log_level": "INFO",
+
+        "message": "Wafer moved to TransferArm."
+
+      },
+
+      {
+
+        "timestamp": "2025-08-01 08:00:10",
+
+        "module": "ProcessChamber1",
+
+        "log_level": "INFO",
+
+        "message": "Start etching process."
+
+      },
+
+      {
+
+        "timestamp": "2025-08-01 08:10:15",
+
+        "module": "ProcessChamber1",
+
+        "log_level": "WARN",
+
+        "message": "Chamber pressure fluctuation detected."
+
+      },
+
+      {
+
+        "timestamp": "2025-08-01 08:20:40",
+
+        "module": "ProcessChamber2",
+
+        "log_level": "ERROR",
+
+        "message": "Heater malfunction detected."
+
+      },
+
+      {
+
+        "timestamp": "2025-08-01 08:25:00",
+
+        "module": "TransferArm",
+
+        "log_level": "INFO",
+
+        "message": "Wafer transfer halted."
+
+      },
+
+      {
+
+        "timestamp": "2025-08-01 08:25:05",
+
+        "module": "UnloadPort2",
+
+        "log_level": "INFO",
+
+        "message": "Manual unload initiated."
+
+      }
+
+    ]
+
+  },
+
+  "instructions": "Provide your analysis in the following structured format:\n\nObservations:\n- List key log patterns, module idle times, anomalies, and noteworthy events.\n\nPossible Causes:\n- Infer potential reasons behind WARN and ERROR level logs based on module behavior and messages.\n\nRecommendations:\n- Suggest corrective actions such as inspections, maintenance, or operational changes.\n\nBe concise, technically detailed, and ensure your response is actionable."
+
+}
+ 
