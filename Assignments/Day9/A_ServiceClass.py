@@ -1,3 +1,9 @@
+# 3. Create a base class Service, and derive two classes: SecurityService and BaggageService.
+
+# Requirements:
+# -Service class has a method service_info().
+# -Derived classes override or extend this to describe their own service.
+ 
 class Service:
     def service_info(self):
         return "Base class service."

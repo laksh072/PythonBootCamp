@@ -1,3 +1,10 @@
+# 1. Create a base class Flight with basic flight information. Create a derived class ScheduledFlight that adds scheduling information.
+
+# Requirements:
+# -Flight should have attributes: flight number, airline.
+# -ScheduledFlight should add departure time and arrival time.
+# -Include methods to display complete flight information.
+
 class Flight:
 
     def __init__(self, flightName, flightNo):
@@ -5,7 +12,7 @@ class Flight:
         self.Number = flightNo
 
     def display_Flight_Info(self):
-        print(f"{self.Name} : {self.Number}")
+        print(f"FlightInfo - {self.Name} : {self.Number}")
 
 class ScheduledFlight(Flight):
 

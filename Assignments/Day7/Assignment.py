@@ -22,79 +22,83 @@
 # Inner block for booking operations.
 # Outer block for file handling & re-raised exceptions
 
+import os
 
-class FlightNotFoundError(Exception):
+class IncorrectFlightNumber(Exception):
     pass
 
 
-class SeatsUnavailableError(Exception):
+class InsufficientSeats(Exception):
     pass
 
 
 def read_flight_data(filename):
-    flights = {}
+    flights = {} # dictionary to store flight infor
+    file = None
     try:
         with open(filename, "r") as file:
             for line in file:
                 parts = line.strip().split()
                 if len(parts) == 3:
-                    flight_number = parts[0]
-                    available_seats = int(parts[1])
-                    price_per_ticket = float(parts[2])
+                    flight_number, seats, price = parts[0], int(parts[1]), float(parts[2])
                     flights[flight_number] = {
-                        "available_seats": available_seats,
-                        "price_per_ticket": price_per_ticket,
+                        "available_seats": seats,
+                        "price_per_ticket": price,
                     }
+        print(flights)
     except FileNotFoundError:
         print("Error: The file was not found.")
     except Exception as e:
         print(f"An error occurred: {e}")
+    finally:
+        if not file:
+            file.close()
     return flights
 
 
 def book_tickets(flights, flight_number, num_tickets):
 
-    if num_tickets is not int:
+    if num_tickets <=0:
         raise ValueError("Number of tickets must be integers.")
 
     if flight_number not in flights:
-        raise FlightNotFoundError(f"Flight {flight_number} not found.")
+        raise IncorrectFlightNumber(f"Flight {flight_number} not found.")
 
     flight = flights[flight_number]
 
     if num_tickets > flight["available_seats"]:
-        raise SeatsUnavailableError(
+        raise InsufficientSeats(
             f"Only {flight['available_seats']} seats available, but {num_tickets} requested."
         )
     elif num_tickets <= 0:
         raise ZeroDivisionError("Number of tickets must be greater than zero.")
 
     total_cost = num_tickets * flight["price_per_ticket"]
-    discount_per_ticket = total_cost / num_tickets
+    discount_onCost = total_cost * 0.3 # 30% discount
 
     # Update available seats
     flight["available_seats"] -= num_tickets
 
-    return total_cost, discount_per_ticket
+    return total_cost, discount_onCost
 
-
-filename = "flightInfo.txt"
-flights = read_flight_data(filename)
+current_dir = os.getcwd()
+abs_path = os.path.abspath(os.path.join(current_dir,"flightInfo.txt"))
+flights = read_flight_data(abs_path)
 
 try:
     flight_number = input("Enter flight number: ")
     num_tickets = int(input("Enter number of tickets to book: "))
-
+    print(f"requesting {num_tickets} with flight {flight_number}")
     try:
-        total_cost, discount_per_ticket = book_tickets(
+        total_cost, discount_price = book_tickets(
             flights, flight_number, num_tickets
         )
         print(f"Flight {flight_number} booked successfully!")
         print(f"Total booking cost: {total_cost}")
-        print(f"Discount per ticket: {discount_per_ticket}")
-    except FlightNotFoundError as fnfe:
+        print(f"Discounted Price: {discount_price}")
+    except IncorrectFlightNumber as fnfe:
         print(fnfe)
-    except SeatsUnavailableError as sue:
+    except InsufficientSeats as sue:
         print(sue)
     except ValueError:
         print("Invalid input. Please enter numeric values for number of tickets.")

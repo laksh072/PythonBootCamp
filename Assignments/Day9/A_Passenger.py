@@ -1,4 +1,12 @@
 #multiple inheritance
+# 4. Create one class PassengerDetails and another class TicketDetails. Create a new class Booking that inherits from both.
+
+# Requirements:
+
+# - PassengerDetails has name, age.
+# - TicketDetails has ticket number, seat number.
+# - Booking shows all information.
+
 class Passenger:
     def __init__(self, name, age):
         self.name = name

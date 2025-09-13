@@ -1,4 +1,8 @@
 #Multi level inheritance
+# 2. Create a base class Person, derived class CrewMember, and a further derived class Pilot.
+# -Person contains name and ID.
+# -CrewMember adds role (e.g., "Cabin Crew", "Pilot").
+# -Pilot adds license number and rank (e.g., "Captain").
 
 class Person:
 
